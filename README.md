@@ -1,12 +1,12 @@
-# Citi-Wallet:
+# Citi-Wallet
    ◾ Citi-Wallet is an online service that allows an individual to make electronic transactions. An individual's bank account
  can be linked to this wallet for enabling transactions. Users can also store their driving license, pan card, voters id in it.
  
- ## Features:
+ ## Features
    ◾ Users can log in to the Citi-Wallet using their mobile numbers linked with the bank account. User's accounts cannot be 
  duplicated.They can view the current balance and transaction history. They can view the stored ID information in the wallet.
   
- ### Feature1: Bank Account creation 
+ ### Feature 1 : Bank Account creation 
    ◾ Users can create the login on only one condition that he/she should have a Citibank Account. If the user doesn't have a
  Citibank account, he/she should create a bank account directly contacting the bank. 
  
