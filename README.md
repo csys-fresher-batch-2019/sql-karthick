@@ -215,3 +215,21 @@ select * from transaction_table;
 
 ```
  
+ 
+| Sender_mob | Receiver_mob | Category | Transaction_time               | Transaction_amount | Transaction_status |
+|------------|--------------|----------|--------------------------------|--------------------|--------------------|
+| 6383055138 | 6383055145   | Debited  | 03-01-20 02:00:06.000000000 AM | 1500               | Success            |
+| 6383055138 | 6383055123   | Debited  | 03-01-20 02:00:56.000000000 AM | 1500               | Success            |
+| 6383055145 | 6383055123   | Debited  | 03-01-20 02:01:39.000000000 AM | 1500               | Success            |
+| 6383055145 | 6383055138   | Debited  | 03-01-20 02:03:14.000000000 AM | 1500               | Success            |
+
+
+◾ Balance after transaction 
+
+| User_name | Mobile_no  | Email_id           | Account_no | Balance | Account_status | Kyc_details |
+|-----------|------------|--------------------|------------|---------|----------------|-------------|
+| Karthi    | 6383055138 | karthick@gmail.com | 5520049447 | 47000   | Active         | Y           |
+| Selva     | 6383055145 | selva@gmail.com    | 5520049456 | 60000   | Active         | Y           |
+| Siva      | 6383055123 | siva@gmail.com     | 5520049347 | 73000   | Active         | Y           |
+| Kesavan   | 6383054567 | kesav@gmail.com    | 5520049443 | 80000   | Inactive       | N           |
+| Ajmal     | 6383567878 | ajmal@gmail.com    | 5520049677 | 90000   | Active         | N           |
