@@ -28,11 +28,16 @@ constraint acc_no_pk unique(account_no),
 constraint acc_no_chk check( 1000000000<=account_no and account_no<=9999999999),
 constraint kyc_ck check (kyc_details in ('Y','N'))
 );
-insert into account_details(user_name,mobile_no,email_id,account_no,balance,kyc_details) values ('Karthi',6383055138,'karthick@gmail.com',5520049447,50000.00,'Y');
-insert into account_details(user_name,mobile_no,email_id,account_no,balance,kyc_details) values ('Selva',6383055145,'selva@gmail.com',5520049456,60000.00,'Y');
-insert into account_details(user_name,mobile_no,email_id,account_no,balance,kyc_details) values ('Siva',6383055123,'siva@gmail.com',5520049347,70000.00,'Y');
-insert into account_details(user_name,mobile_no,email_id,account_no,balance,account_status) values ('Kesavan',6383054567,'kesav@gmail.com',5520049443,80000.00,'Inactive');
-insert into account_details(user_name,mobile_no,email_id,account_no,balance) values ('Ajmal',6383567878,'ajmal@gmail.com',5520049677,90000.00);
+insert into account_details(user_name,mobile_no,email_id,account_no,balance,kyc_details) 
+values ('Karthi',6383055138,'karthick@gmail.com',5520049447,50000.00,'Y');
+insert into account_details(user_name,mobile_no,email_id,account_no,balance,kyc_details)
+values ('Selva',6383055145,'selva@gmail.com',5520049456,60000.00,'Y');
+insert into account_details(user_name,mobile_no,email_id,account_no,balance,kyc_details) 
+values ('Siva',6383055123,'siva@gmail.com',5520049347,70000.00,'Y');
+insert into account_details(user_name,mobile_no,email_id,account_no,balance,account_status)
+values ('Kesavan',6383054567,'kesav@gmail.com',5520049443,80000.00,'Inactive');
+insert into account_details(user_name,mobile_no,email_id,account_no,balance) 
+values ('Ajmal',6383567878,'ajmal@gmail.com',5520049677,90000.00);
 
 select * from account_details;
 
