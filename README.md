@@ -1,13 +1,17 @@
 # CitiPe
+
    ◾ CitiPe is an online service that allows an individual to make electronic transactions. An individual's bank account
      can be linked to this for enabling transactions. 
  
  ## Features
+ 
    ◾ Users can log in to the Citipe using their mobile numbers linked with the bank account. User's accounts cannot be 
      duplicated.They can view the current balance and transaction history.
   
  ### Feature 1 : Bank Account Database 
+ 
    ◾ Basic info about the bank users.
+   
  ```sql
  
 drop table account_details;
@@ -40,7 +44,6 @@ values ('Ajmal',6383567878,'ajmal@gmail.com',5520049677,90000.00);
 
 select * from account_details;
 
-
 ```
 | User_id | Mobile_no  |    Email_id        | Account_no | Balance | Account_status | Kyc_details |
 |---------|------------|--------------------|------------|---------|----------------|-------------|
@@ -51,14 +54,17 @@ select * from account_details;
 | Kesavan | 6383054567 | kesav@gmail.com    | 5520049443 | 80000   | Inactive       | N           |
 
 
-### No of user accounts active 
-select count(mobile_no) from account_details where account_status='Active';
+ ◾ No of user accounts active 
 
-### Updating kyc_details 
-update account_details set kyc_details='Y' where user_id='Kesavan';
+     select count(mobile_no) from account_details where account_status='Active';
+
+ ◾ Updating kyc_details 
+
+     update account_details set kyc_details='Y' where user_id='Kesavan';
 
 
 ### Feature 2 : CitiPe login
+
   ◾  Users can create the login on only one condition that he/she should have a Citibank Account.
   
 ```sql
@@ -121,16 +127,17 @@ select * from login;
 | 1004       | 6383567878 |
 
 
-### One user cannot have multiple pins.
+ ◾ One user cannot have multiple pins.
 
-### Inactive accounts cannot be logged in.
+ ◾ Inactive accounts cannot be logged in.
 
-### Changing the upi_passwd :
+ ◾ Changing the upi_passwd :
 
-update login set upi_passwd= 1234 where mobile_no=6383055138;
+     update login set upi_passwd= 1234 where mobile_no=6383055138;
 
 
 ### Feature 3 : Transaction details
+
   ◾ Users can check the transaction history and check balance.
   
 ```sql
