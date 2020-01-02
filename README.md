@@ -1,13 +1,13 @@
-# Citipe
-   ◾ Citipe is an online service that allows an individual to make electronic transactions. An individual's bank account
+# CitiPe
+   ◾ CitiPe is an online service that allows an individual to make electronic transactions. An individual's bank account
      can be linked to this for enabling transactions. 
  
  ## Features
    ◾ Users can log in to the Citipe using their mobile numbers linked with the bank account. User's accounts cannot be 
      duplicated.They can view the current balance and transaction history.
   
- ### Feature 1 : Bank Account creation 
-   ◾ Users can create the login on only one condition that he/she should have a Citibank Account.
+ ### Feature 1 : Bank Account Database 
+   ◾ Linking the Users can create the login on only one condition that he/she should have a Citibank Account.
  
  ```sql
  
@@ -36,5 +36,12 @@ insert into account_details(user_name,mobile_no,email_id,account_no,account_type
 select * from account_details;
 
 ```
+| User_id | Mobile_no  |    Email_id        | Account_no | Balance | Account_status | Kyc_details |
+|---------|------------|--------------------|------------|---------|----------------|-------------|
+| Karthi  | 6383055138 | karthick@gmail.com | 5520049447 | 50000   | Active         | Y           |
+| Selva   | 6383055145 | selva@gmail.com    | 5520049456 | 60000   | Active         | Y           |
+| Siva    | 6383055123 | siva@gmail.com     | 5520049347 | 70000   | Active         | Y           |
+| Ajmal   | 6383567878 | ajmal@gmail.com    | 5520049677 | 90000   | Active         | N           |
+| Kesavan | 6383054567 | kesav@gmail.com    | 5520049443 | 80000   | Inactive       | N           |
 
  
