@@ -51,10 +51,10 @@ select * from account_details;
 | Kesavan | 6383054567 | kesav@gmail.com    | 5520049443 | 80000   | Inactive       | N           |
 
 
---No of user accounts active 
+### No of user accounts active 
 select count(mobile_no) from account_details where account_status='Active';
 
---Updating kyc_details 
+### Updating kyc_details 
 update account_details set kyc_details='Y' where user_id='Kesavan';
 
 
@@ -121,11 +121,12 @@ select * from login;
 | 1004       | 6383567878 |
 
 
---One user cannot have multiple pins.
+### One user cannot have multiple pins.
 
---Inactive accounts cannot be logged in.
+### Inactive accounts cannot be logged in.
 
---Changing the upi_passwd
+### Changing the upi_passwd :
+
 update login set upi_passwd= 1234 where mobile_no=6383055138;
 
 
@@ -232,7 +233,7 @@ select * from transaction_table;
 ```
 ◾ Successfull transactions
 
-select (*) from transaction_table where transaction_status='Success';
+     select (*) from transaction_table where transaction_status='Success';
  
 | Sender_mob | Receiver_mob | Category | Transaction_time               | Transaction_amount | Transaction_status |
 |------------|--------------|----------|--------------------------------|--------------------|--------------------|
@@ -244,7 +245,7 @@ select (*) from transaction_table where transaction_status='Success';
 
 ◾ Balance after transaction 
 
-select user_name,mobile_no,account_no,balance from account_details;
+     select user_name,mobile_no,account_no,balance from account_details;
 
 | User_name | Mobile_no  | Account_no | Balance |
 |-----------|------------|------------|---------|
