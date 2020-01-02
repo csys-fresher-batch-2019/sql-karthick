@@ -7,8 +7,7 @@
      duplicated.They can view the current balance and transaction history.
   
  ### Feature 1 : Bank Account Database 
-   ◾ Linking the Users can create the login on only one condition that he/she should have a Citibank Account.
- 
+   ◾ Basic info about the bank users.
  ```sql
  
 drop table account_details;
@@ -51,4 +50,168 @@ select * from account_details;
 | Ajmal   | 6383567878 | ajmal@gmail.com    | 5520049677 | 90000   | Active         | N           |
 | Kesavan | 6383054567 | kesav@gmail.com    | 5520049443 | 80000   | Inactive       | N           |
 
+### Feature 2 : CitiPe login
+  ◾  Users can create the login on only one condition that he/she should have a Citibank Account.
+  
+```sql
+
+drop table login;
+create table login(
+mobile_no number(10) not null,
+upi_passwd number(4) not null,
+constraint mob_fk foreign key(mobile_no) references account_details(mobile_no)
+);
+
+create or replace Procedure Login_Procedure(
+m_mobile_no in number,
+passwd in number,
+login_stats out varchar2) 
+as verify_sts number;
+refer number;
+Begin
+    verify_sts := mob_fn(m_mobile_no);
+    if verify_sts=1 then
+    insert into login(mobile_no,upi_passwd) values (m_mobile_no,to_char('0000'||passwd));
+   login_stats := 'SUCCESS';
+    commit;
+    end if;
+   EXCEPTION WHEN OTHERS THEN
+    login_stats := 'Account doesnot exist';
+End Login_Procedure;
+
+create or replace function mob_fn (m_mob in number) 
+return number as mob number:= 0;
+refer number:=0;
+refer1 number:=0;
+Begin
+   select mobile_no into refer from account_details where mobile_no=m_mob and account_status='Active;
+   select count(mobile_no) into refer1 from login where mobile_no=m_mob;
+   if ((refer!=m_mob) or (refer1!=0)) then
+   mob:=0;
+   else 
+   mob:=1;
+  Return mob;
+  end if;
+End mob_Fn;
+
+declare
+login_stats varchar2(100);
+begin
+login_procedure(6383055145,1001,login_stats);
+dbms_output.put_line(login_stats);
+end;
+
+select * from login;
+
+```
+
+| Upi_passwd | Mobile_no  |
+|------------|------------|
+| 1001       | 6383055138 |
+| 1002       | 6383055145 |
+| 1003       | 6383055123 |
+| 1004       | 6383567878 |
+
+
+### Feature 3 : Transaction details
+  ◾ Users can check the transaction history and check balance.
+  
+```sql
+
+drop table transaction_table;
+create table transaction_table(
+mobile_no number(10) not null,
+rec_mob_no number(10) not null,
+categories varchar2(50),
+transaction_time timestamp default sysdate,
+transaction_amount number not null,
+transaction_status varchar2(50) not null,
+constraint amount_ck check(transaction_amount>0),
+constraint status_ck check(transaction_status in ('Success','Failure')),
+constraint category_ck check(categories in ('Credited','Debited','No Transaction')),
+constraint mobi_fk foreign key(mobile_no) references account_details(mobile_no)
+);
+
+create or replace procedure transaction_proc(
+sender_mob in number,
+receiver_mob in number,
+transfer_amount in number,
+pin_no in number,
+transaction_sts out varchar
+)as confirmation1 number;
+confirmation2 number;
+pin_confirmation number;
+final_check number;
+begin
+  confirmation1:=mob_fn1(sender_mob);
+  confirmation2:=mob_fn1(receiver_mob);
+  final_check:=status_chk(sender_mob,receiver_mob);
+  select upi_passwd into pin_confirmation from login where mobile_no=sender_mob;
+  if ( (confirmation1=1 and confirmation2=1) AND  transfer_amount>0 AND pin_confirmation=pin_no and final_check=1) then
+      update account_details set balance = balance-transfer_amount where mobile_no=sender_mob;
+      update account_details set balance = balance+transfer_amount where mobile_no=receiver_mob;
+      insert into transaction_table(mobile_no,rec_mob_no,categories,transaction_amount,transaction_status) values
+      (sender_mob,receiver_mob,'Debited',transfer_amount,'Success');
+       transaction_sts:='Transaction Successfull';
+  end if;
+  commit;
+  exception when others then
+  transaction_sts:='Transaction Failed';
+  rollback;
+end transaction_proc;
+
+create or replace function mob_fn1(m_mob in number) 
+return number as mob number:= 0;
+refer number:=0;
+refer1 number:=0;
+Begin
+   select mobile_no into refer from account_details where mobile_no=m_mob;
+   if (refer!=m_mob) then
+   mob:=0;
+   else 
+   mob:=1;
+  Return mob;
+  end if;
+End mob_fn1;
+
+create or replace function status_chk(
+s_mob in number,
+r_mob in number
+)return number as confirmation1 number;
+confirmation2 number;
+sts_chk1 varchar2(50);
+kyc_chk1 char(1);
+sts_chk2 varchar2(50);
+kyc_chk2 char(1);
+final_chk number;
+begin
+select account_status into sts_chk1 from account_details where mobile_no=s_mob;
+select kyc_details into kyc_chk1 from account_details where mobile_no=s_mob;
+if ( sts_chk1='Active' and kyc_chk1='Y') then
+confirmation1:=1;
+end if;
+select account_status into sts_chk2 from account_details where mobile_no=r_mob;
+select kyc_details into kyc_chk2 from account_details where mobile_no=r_mob;
+if ( sts_chk2='Active' and kyc_chk2='Y') then
+confirmation2:=1;
+end if;
+if(confirmation1=1 and confirmation2=1) then
+final_chk:=1;
+else 
+final_chk:=0;
+end if;
+return final_chk; 
+end status_chk;
+
+declare
+transaction_sts varchar2(100);
+begin
+transaction_proc(6383055145,6383055138,1500,1001,transaction_sts);
+dbms_output.put_line(transaction_sts);
+end;
+
+select * from transaction_table;
+
+
+```
  
