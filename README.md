@@ -50,6 +50,14 @@ select * from account_details;
 | Ajmal   | 6383567878 | ajmal@gmail.com    | 5520049677 | 90000   | Active         | N           |
 | Kesavan | 6383054567 | kesav@gmail.com    | 5520049443 | 80000   | Inactive       | N           |
 
+
+--No of user accounts active 
+select count(mobile_no) from account_details where account_status='Active';
+
+--Updating kyc_details 
+update account_details set kyc_details='Y' where user_id='Kesavan';
+
+
 ### Feature 2 : CitiPe login
   ◾  Users can create the login on only one condition that he/she should have a Citibank Account.
   
@@ -111,6 +119,14 @@ select * from login;
 | 1002       | 6383055145 |
 | 1003       | 6383055123 |
 | 1004       | 6383567878 |
+
+
+--One user cannot have multiple pins.
+
+--Inactive accounts cannot be logged in.
+
+--Changing the upi_passwd
+update login set upi_passwd= 1234 where mobile_no=6383055138;
 
 
 ### Feature 3 : Transaction details
@@ -214,7 +230,9 @@ select * from transaction_table;
 
 
 ```
- 
+◾ Successfull transactions
+
+select (*) from transaction_table where transaction_status='Success';
  
 | Sender_mob | Receiver_mob | Category | Transaction_time               | Transaction_amount | Transaction_status |
 |------------|--------------|----------|--------------------------------|--------------------|--------------------|
@@ -226,10 +244,12 @@ select * from transaction_table;
 
 ◾ Balance after transaction 
 
-| User_name | Mobile_no  | Email_id           | Account_no | Balance | Account_status | Kyc_details |
-|-----------|------------|--------------------|------------|---------|----------------|-------------|
-| Karthi    | 6383055138 | karthick@gmail.com | 5520049447 | 47000   | Active         | Y           |
-| Selva     | 6383055145 | selva@gmail.com    | 5520049456 | 60000   | Active         | Y           |
-| Siva      | 6383055123 | siva@gmail.com     | 5520049347 | 73000   | Active         | Y           |
-| Kesavan   | 6383054567 | kesav@gmail.com    | 5520049443 | 80000   | Inactive       | N           |
-| Ajmal     | 6383567878 | ajmal@gmail.com    | 5520049677 | 90000   | Active         | N           |
+select user_name,mobile_no,account_no,balance from account_details;
+
+| User_name | Mobile_no  | Account_no | Balance |
+|-----------|------------|------------|---------|
+| Karthi    | 6383055138 | 5520049447 | 47000   |
+| Selva     | 6383055145 | 5520049456 | 60000   |
+| Siva      | 6383055123 | 5520049347 | 73000   |
+| Kesavan   | 6383054567 | 5520049443 | 80000   |
+| Ajmal     | 6383567878 | 5520049677 | 90000   |
