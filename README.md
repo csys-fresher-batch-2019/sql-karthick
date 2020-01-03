@@ -63,7 +63,7 @@ select * from account_details;
      update account_details set kyc_details='Y' where user_id='Kesavan';
 
 
-### Feature 2 : CitiPe login
+### Feature 2 : CitiPay login
 
   ◾  Users can create the login on only one condition that he/she should have a Citibank Account.
   
