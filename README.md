@@ -1,6 +1,6 @@
-# CitiPe
+# CitiPay
 
-   ◾ CitiPe is an online service that allows an individual to make electronic transactions. An individual's bank account
+   ◾ CitiPay is an online service that allows an individual to make electronic transactions. An individual's bank account
      can be linked to this for enabling transactions. 
  
  ## Features
