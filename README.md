@@ -203,20 +203,18 @@ s_mob in number,
 r_mob in number
 )return number as confirmation1 number;
 confirmation2 number;
-sts_chk1 varchar2(50);
-kyc_chk1 char(1);
-sts_chk2 varchar2(50);
-kyc_chk2 char(1);
+sts_chk varchar2(50);
+kyc_chk char(1);
 final_chk number;
 begin
-select account_status into sts_chk1 from account_details where mobile_no=s_mob;
-select kyc_details into kyc_chk1 from account_details where mobile_no=s_mob;
-if ( sts_chk1='Active' and kyc_chk1='Y') then
+select account_status into sts_chk from account_details where mobile_no=s_mob;
+select kyc_details into kyc_chk from account_details where mobile_no=s_mob;
+if ( sts_chk='Active' and kyc_chk='Y') then
 confirmation1:=1;
 end if;
-select account_status into sts_chk2 from account_details where mobile_no=r_mob;
-select kyc_details into kyc_chk2 from account_details where mobile_no=r_mob;
-if ( sts_chk2='Active' and kyc_chk2='Y') then
+select account_status into sts_chk from account_details where mobile_no=r_mob;
+select kyc_details into kyc_chk from account_details where mobile_no=r_mob;
+if ( sts_chk='Active' and kyc_chk='Y') then
 confirmation2:=1;
 end if;
 if(confirmation1=1 and confirmation2=1) then
@@ -250,14 +248,24 @@ select * from transaction_table;
 | 6383055145 | 6383055138   | Debited  | 03-01-20 02:03:14.000000000 AM | 1500               | Success            |
 
 
-◾ Balance after transaction 
+◾ Balance of a particular user
 
-     select user_name,mobile_no,account_no,balance from account_details;
+     select user_name,mobile_no,account_no,balance from account_details where mobile_no=6383055138;
 
 | User_name | Mobile_no  | Account_no | Balance |
 |-----------|------------|------------|---------|
 | Karthi    | 6383055138 | 5520049447 | 47000   |
-| Selva     | 6383055145 | 5520049456 | 60000   |
-| Siva      | 6383055123 | 5520049347 | 73000   |
-| Kesavan   | 6383054567 | 5520049443 | 80000   |
-| Ajmal     | 6383567878 | 5520049677 | 90000   |
+
+
+◾ Transaction history of a particular user
+
+     select * from transaction_table where mobile_no=6383055138;
+     
+| Mobile_no  | Rec_mobile | Category | Transaction_time               | Transfer_amount | Transaction_status |
+|------------|------------|----------|--------------------------------|-----------------|--------------------|
+| 6383055138 | 6383055145 | Debited  | 03-01-20 02:00:06.000000000 AM | 1500            | Success            |
+| 6383055138 | 6383055123 | Debited  | 03-01-20 02:00:56.000000000 AM | 1500            | Success            |
+| 6383055138 | 6383055145 | Debited  | 03-01-20 02:11:41.000000000 AM | 1500            | Success            |  
+
+
+
