@@ -274,7 +274,7 @@ select * from transaction_table;
 
 
 
-
+```sql
 
 
 ## table 1
@@ -662,6 +662,6 @@ end status_chk;
 
 select status_chk(6383055138,6383055145) from dual;
 
-
+```
 
 
